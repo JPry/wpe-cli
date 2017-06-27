@@ -1,0 +1,32 @@
+{
+    "alias": "wpe-cli.phar",
+    "directories": [
+        "src"
+    ],
+    "files": [
+        "vendor/autoload.php",
+        "composer.json",
+        "vendor/rmccue/requests/library/Requests/Transport/cacert.pem"
+    ],
+    "finder": [
+        {
+            "name": "*.php",
+            "in": [
+                "vendor/composer",
+                "vendor/psr",
+                "vendor/rmccue",
+                "vendor/symfony"
+            ],
+            "exclude": [
+                "Tests",
+                "tests",
+                "Tester"
+            ]
+        }
+    ],
+    "main": "bin/main",
+    "output": "wpe-cli.phar",
+    "chmod": "0775",
+    "stub": true,
+    "web": false
+}
