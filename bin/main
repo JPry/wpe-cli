@@ -1,0 +1,55 @@
+#!/usr/bin/env php
+<?php
+
+use JPry\Command\AddAccount;
+use JPry\Command\ListAccounts;
+use JPry\Command\Remote;
+use JPry\Command\RemoveAccount;
+use JPry\Helper\StorageFile;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Filesystem\Filesystem;
+
+define('ROOT_DIR', dirname(__DIR__));
+
+require_once(ROOT_DIR . '/vendor/autoload.php');
+
+$data = json_decode(ROOT_DIR . '/composer.json');
+$version = isset($data->version) ? $data->version : 'dev';
+
+// Set up some requirements
+$storage = new StorageFile(new Filesystem());
+$app = new Application('wpe_cli', $version);
+$helpers = $app->getHelperSet();
+$helpers->set($storage);
+$app->setHelperSet($helpers);
+
+// Get all of our commands and store them in an array.
+$commands = array(
+    new Remote(),
+    new AddAccount(),
+    new RemoveAccount(),
+    new ListAccounts(),
+);
+foreach ($commands as $num => $command) {
+    $commands[$command->getName()] = $command;
+    foreach ($command->getAliases() as $alias) {
+        $commands[$alias] = $command;
+    }
+    unset($commands[$num], $alias);
+}
+
+// Add commands to the application
+$app->addCommands($commands);
+
+// Maybe adjust the command to run.
+$input = new \Symfony\Component\Console\Input\ArgvInput();
+$command = $input->getFirstArgument();
+if (1 < $argc && false === $input->hasParameterOption(array('--help', '-h'), true) && !isset($commands[$command])) {
+    $args = array_slice($argv, 0, 1);
+    $args[] = 'remote';
+    $args = array_merge($args, array_slice($argv, 1));
+    $input = new \Symfony\Component\Console\Input\ArgvInput($args);
+}
+
+// Run the app
+$app->run($input);
