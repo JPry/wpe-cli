@@ -13,12 +13,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Remote extends Command
+class CLIRun extends Command
 {
     protected function configure()
     {
         $this
-            ->setName('remote')
+            ->setName('cli:run')
             ->setDescription('Run WP CLI commands against WP Engine install.')
             ->addOption(
                 'account',

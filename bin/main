@@ -3,7 +3,7 @@
 
 use JPry\Command\AddAccount;
 use JPry\Command\ListAccounts;
-use JPry\Command\Remote;
+use JPry\Command\CLIRun;
 use JPry\Command\RemoveAccount;
 use JPry\Helper\StorageFile;
 use Symfony\Component\Console\Application;
@@ -25,7 +25,7 @@ $app->setHelperSet($helpers);
 
 // Get all of our commands and store them in an array.
 $commands = array(
-    new Remote(),
+    new CLIRun(),
     new AddAccount(),
     new RemoveAccount(),
     new ListAccounts(),
@@ -46,7 +46,7 @@ $input = new \Symfony\Component\Console\Input\ArgvInput();
 $command = $input->getFirstArgument();
 if (1 < $argc && false === $input->hasParameterOption(array('--help', '-h'), true) && !isset($commands[$command])) {
     $args = array_slice($argv, 0, 1);
-    $args[] = 'remote';
+    $args[] = 'cli:run';
     $args = array_merge($args, array_slice($argv, 1));
     $input = new \Symfony\Component\Console\Input\ArgvInput($args);
 }
