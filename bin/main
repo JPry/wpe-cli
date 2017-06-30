@@ -22,8 +22,9 @@ $helpers->set($storage);
 $app->setHelperSet($helpers);
 
 // Get all of our commands and store them in an array.
+$main = new CLIRun();
 $commands = array(
-    new CLIRun(),
+    $main,
     new AddAccount(),
     new RemoveAccount(),
     new ListAccounts(),
