@@ -54,7 +54,7 @@ class ListAccounts extends Command
                 $message .= '<info>(default)</info>';
             }
             if ($input->getOption('show-key')) {
-                $message .= (!$isDefault ? str_pad('', 10, ' ', STR_PAD_LEFT) : ' ') . $storage->getAccountKey($account);
+                $message .= (!$isDefault ? str_pad('', 10, ' ') : ' ') . $storage->getAccountKey($account);
             }
             $messages[] = $message;
         }

@@ -126,7 +126,11 @@ class CLIRun extends Command
         if ($input->getOption('store') && $input->getOption('account') && $input->getOption('apikey')) {
             /** @var StorageFile $storage */
             $storage = $this->getHelper('storage');
-            $storage->setAccountKey($input->getOption('account'), $input->getOption('apikey'), $input->getOption('default'));
+            $storage->setAccountKey(
+                $input->getOption('account'),
+                $input->getOption('apikey'),
+                $input->getOption('default')
+            );
             $output->writeln('<info>Account data stored for future use</info>');
         }
     }
