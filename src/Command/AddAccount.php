@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 
 namespace JPry\Command;
 
@@ -12,6 +9,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Add an account to the storage file.
+ *
+ * @package JPry\Command
+ */
 class AddAccount extends Command
 {
     protected function configure()

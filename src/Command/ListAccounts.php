@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 
 namespace JPry\Command;
 
@@ -11,6 +8,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * List the accounts that are stored in the storage file.
+ *
+ * @package JPry\Command
+ */
 class ListAccounts extends Command
 {
     protected function configure()

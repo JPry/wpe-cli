@@ -46,7 +46,12 @@ class StorageFile implements HelperInterface
         return array_keys($this->accounts);
     }
 
-
+    /**
+     * Get the default account.
+     *
+     * @author Jeremy Pry
+     * @return string
+     */
     public function getDefaultAccount()
     {
         return $this->defaultAccount;
@@ -158,18 +163,34 @@ class StorageFile implements HelperInterface
         $contents['accounts'] = $this->accounts;
         $contents['default_account'] = $this->defaultAccount;
         $this->fs->dumpFile($this->file, json_encode($contents));
+        $this->fs->chmod($this->file, 0600);
     }
 
+    /**
+     * Sets the helper set associated with this helper.
+     *
+     * @param HelperSet $helperSet A HelperSet instance
+     */
     public function setHelperSet(HelperSet $helperSet = null)
     {
         $this->helperSet = $helperSet;
     }
 
+    /**
+     * Gets the helper set associated with this helper.
+     *
+     * @return HelperSet A HelperSet instance
+     */
     public function getHelperSet()
     {
         return $this->helperSet;
     }
 
+    /**
+     * Returns the canonical name of this helper.
+     *
+     * @return string The canonical name
+     */
     public function getName()
     {
         return $this->name;
