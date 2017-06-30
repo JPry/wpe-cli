@@ -2,11 +2,13 @@
 <?php
 
 use JPry\Command\AddAccount;
-use JPry\Command\ListAccounts;
 use JPry\Command\CLIRun;
+use JPry\Command\ListAccounts;
 use JPry\Command\RemoveAccount;
 use JPry\Helper\StorageFile;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Exception\CommandNotFoundException;
+use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Filesystem\Filesystem;
 
 require_once(dirname(__DIR__) . '/vendor/autoload.php');
@@ -29,25 +31,21 @@ $commands = array(
     new RemoveAccount(),
     new ListAccounts(),
 );
-foreach ($commands as $num => $command) {
-    $commands[$command->getName()] = $command;
-    foreach ($command->getAliases() as $alias) {
-        $commands[$alias] = $command;
-    }
-    unset($commands[$num], $alias);
-}
 
 // Add commands to the application
 $app->addCommands($commands);
 
 // Maybe adjust the command to run.
-$input = new \Symfony\Component\Console\Input\ArgvInput();
-$command = $input->getFirstArgument();
-if (1 < $argc && false === $input->hasParameterOption(array('--help', '-h'), true) && !isset($commands[$command])) {
+$input = new ArgvInput();
+try {
+    if (1 > $argc && false === $input->hasParameterOption(array('--help', '-h'), true)) {
+        $app->find($input->getFirstArgument());
+    }
+} catch (CommandNotFoundException $e) {
     $args = array_slice($argv, 0, 1);
-    $args[] = 'cli:run';
+    $args[] = $main->getName();
     $args = array_merge($args, array_slice($argv, 1));
-    $input = new \Symfony\Component\Console\Input\ArgvInput($args);
+    $input = new ArgvInput($args);
 }
 
 // Run the app
