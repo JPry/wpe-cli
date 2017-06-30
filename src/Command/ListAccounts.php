@@ -16,7 +16,7 @@ class ListAccounts extends Command
     protected function configure()
     {
         $this
-            ->setName('list-accounts')
+            ->setName('account:list')
             ->setAliases(array('ls'))
             ->setDescription('Add an account to the storage file.')
             ->addOption(

@@ -17,8 +17,8 @@ class AddAccount extends Command
     protected function configure()
     {
         $this
-            ->setName('add-account')
-            ->setAliases(array('add', 'a'))
+            ->setName('account:add')
+            ->setAliases(array('add'))
             ->setDescription('Add an account to the storage file.')
             ->addArgument(
                 'account',

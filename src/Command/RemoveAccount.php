@@ -13,8 +13,8 @@ class RemoveAccount extends Command
     protected function configure()
     {
         $this
-            ->setName('remove-account')
-            ->setAliases(array('remove', 'r'))
+            ->setName('account:remove')
+            ->setAliases(array('rm'))
             ->setDescription('Remove an account from the storage file.')
             ->addArgument(
                 'account',
