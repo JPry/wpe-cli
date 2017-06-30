@@ -9,9 +9,7 @@ use JPry\Helper\StorageFile;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
 
-define('ROOT_DIR', dirname(__DIR__));
-
-require_once(ROOT_DIR . '/vendor/autoload.php');
+require_once(dirname(__DIR__) . '/vendor/autoload.php');
 
 $version = trim(file_get_contents(dirname(__DIR__) . '/version'));
 $version = $version !== '%' . 'VERSION%' ? $version : 'dev';
