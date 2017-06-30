@@ -13,8 +13,8 @@ define('ROOT_DIR', dirname(__DIR__));
 
 require_once(ROOT_DIR . '/vendor/autoload.php');
 
-$data = json_decode(ROOT_DIR . '/composer.json');
-$version = isset($data->version) ? $data->version : 'dev';
+$version = trim(file_get_contents(dirname(__DIR__) . '/version'));
+$version = $version !== '%' . 'VERSION%' ? $version : 'dev';
 
 // Set up some requirements
 $storage = new StorageFile(new Filesystem());

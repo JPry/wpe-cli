@@ -6,6 +6,7 @@
     "files": [
         "vendor/autoload.php",
         "composer.json",
+        "version",
         "vendor/rmccue/requests/library/Requests/Transport/cacert.pem"
     ],
     "finder": [
