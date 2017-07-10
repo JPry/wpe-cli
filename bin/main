@@ -14,7 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
 require_once(dirname(__DIR__) . '/vendor/autoload.php');
 
 $version = trim(file_get_contents(dirname(__DIR__) . '/version'));
-$version = $version !== '%' . 'VERSION%' ? $version : 'dev';
+$version = $version !== '@' . 'git-tag@' ? $version : 'dev';
 
 // Set up some requirements
 $storage = new StorageFile(new Filesystem());
