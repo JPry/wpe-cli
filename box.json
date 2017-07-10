@@ -25,9 +25,9 @@
             ]
         }
     ],
-    "replacement-sigil": "%",
     "main": "bin/main",
     "output": "wpe-cli.phar",
+    "git-tag": "git-tag",
     "chmod": "0775",
     "stub": true,
     "web": false
